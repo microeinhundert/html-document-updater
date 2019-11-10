@@ -2,10 +2,12 @@
   "name": "html-document-updater",
   "version": "1.0.0",
   "description": "A small utility to update parts of an HTMLDocument with content from another HTMLDocument, configured with a simple configuration object and data attribute.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "microeinhundert/html-document-updater",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "transpile": "babel src -d dist --copy-files --no-comments",
+    "prepublishOnly": "npm run transpile"
   },
   "keywords": [
     "dom",
@@ -17,5 +19,11 @@
     "html"
   ],
   "author": "Leon Seipp <l.seipp@microeinhundert.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/preset-env": "^7.7.1"
+  }
 }
