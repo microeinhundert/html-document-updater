@@ -13,6 +13,8 @@ yarn add html-document-updater
 ## Usage
 
 ```js
+import HTMLDocumentUpdater from 'html-document-updater';
+
 // Initialize
 const htmlDocumentUpdater = new HTMLDocumentUpdater({
   updates: {
