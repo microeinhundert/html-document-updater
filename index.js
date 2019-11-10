@@ -194,16 +194,12 @@ class HTMLDocumentUpdater {
   }
 
   /**
-   * Setter to set the update configuration.
+   * Setter to set the updates configuration.
    * @param {Object} updates
    * @returns {void}
    */
   set updates(updates) {
-    if (typeof updates === 'object') {
-      this._updates = updates;
-    } else {
-      throw new Error('The update configuration must be of type "object"!');
-    }
+    this._updates = updates;
   }
 
   /**
@@ -349,7 +345,7 @@ class HTMLDocumentUpdater {
       if (typeof config.htmlDocument === 'string' || config.htmlDocument instanceof HTMLDocument) {
         this.htmlDocument = config.htmlDocument;
       } else {
-        throw new Error('No valid "htmlDocument" passed to HTMLDocumentUpdater! It has to to be either if type "string" or "HTMLDocument.');
+        throw new Error('No valid "htmlDocument" passed to HTMLDocumentUpdater! It has to to be either of type "string" or "HTMLDocument.');
       }
     }
 
@@ -357,7 +353,7 @@ class HTMLDocumentUpdater {
       if (typeof config.updatedHtmlDocument === 'string' || config.updatedHtmlDocument instanceof HTMLDocument) {
         this.updatedHtmlDocument = config.updatedHtmlDocument;
       } else {
-        throw new Error('No valid "updatedHtmlDocument" passed to HTMLDocumentUpdater! It has to to be either if type "string" or "HTMLDocument.');
+        throw new Error('No valid "updatedHtmlDocument" passed to HTMLDocumentUpdater! It has to to be either of type "string" or "HTMLDocument.');
       }
     }
 

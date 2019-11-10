@@ -1,5 +1,5 @@
 # html-document-updater
-A small utility to update parts of an HTMLDocument with content from another HTMLDocument, configured with a simple configuration object and data attribute. Useful together with libraries like Barba.js to update elements outside of scope.
+A small utility to update parts of an HTMLDocument with content from another HTMLDocument, configured with a simple configuration object and data attribute. Useful together with libraries like [Barba.js](https://github.com/barbajs/barba) to update elements outside of scope.
 
 
 ## Usage
