@@ -21,7 +21,7 @@ const htmlDocumentUpdater = new HTMLDocumentUpdater({
 const parser = new DOMParser();
 htmlDocumentUpdater.htmlDocument = parser.parseFromString('<html></html>', 'text/html');
 
-// Or directly pass the document as string and let the utlity parse it for you
+// Or directly pass the document as string and let the utility parse it for you
 htmlDocumentUpdater.htmlDocument = '<html></html>';
 
 // Or pass the document object to update the DOM (done by default)
@@ -35,7 +35,7 @@ console.log(this.htmlDocumentUpdater.htmlDocument);
 const parser = new DOMParser();
 htmlDocumentUpdater.updatedHtmlDocument = parser.parseFromString('<html></html>', 'text/html');
 
-// Or directly pass the document as string and let the utlity parse it for you
+// Or directly pass the document as string and let the utility parse it for you
 htmlDocumentUpdater.updatedHtmlDocument = '<html></html>';
 
 
