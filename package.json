@@ -1,0 +1,21 @@
+{
+  "name": "html-document-updater",
+  "version": "1.0.0",
+  "description": "A small utility to update parts of an HTMLDocument with content from another HTMLDocument, configured with a simple configuration object and data attribute.",
+  "main": "index.js",
+  "repository": "microeinhundert/html-document-updater",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dom",
+    "utility",
+    "lightweight",
+    "document",
+    "es6",
+    "update",
+    "html"
+  ],
+  "author": "Leon Seipp <l.seipp@microeinhundert.com>",
+  "license": "MIT"
+}
