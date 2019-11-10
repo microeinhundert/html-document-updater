@@ -266,15 +266,15 @@ class HTMLDocumentUpdater {
   handleUpdates() {
     this.elementsInHtmlDocument.forEach((element, updateIdentifier) => {
       if (updateIdentifier in this.updates) {
-        const $elementsInHtmlDocument = element;
-        const $elementsInUpdatedHtmlDocument = this.elementsInUpdatedHtmlDocument.get(updateIdentifier);
+        const $elementInHtmlDocument = element;
+        const $elementInUpdatedHtmlDocument = this.elementsInUpdatedHtmlDocument.get(updateIdentifier);
         const $elementConfig = this.updates[updateIdentifier];
 
         // Update attributes
         if ('attributes' in $elementConfig && $elementConfig.attributes.length) {
           this.updateAttributes(
-            $elementsInHtmlDocument,
-            $elementsInUpdatedHtmlDocument,
+            $elementInHtmlDocument,
+            $elementInUpdatedHtmlDocument,
             $elementConfig.attributes,
             updateIdentifier
           );
@@ -283,8 +283,8 @@ class HTMLDocumentUpdater {
         // Update innerHTML
         if ('innerHTML' in $elementConfig && $elementConfig.innerHTML) {
           this.updateInnerHtml(
-            $elementsInHtmlDocument,
-            $elementsInUpdatedHtmlDocument,
+            $elementInHtmlDocument,
+            $elementInUpdatedHtmlDocument,
             updateIdentifier
           );
         }
