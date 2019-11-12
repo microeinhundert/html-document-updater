@@ -1,6 +1,6 @@
 {
   "name": "html-document-updater",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A small utility to update parts of an HTMLDocument with content from another HTMLDocument, configured with a simple configuration object and data attribute.",
   "main": "dist/index.js",
   "repository": "microeinhundert/html-document-updater",
