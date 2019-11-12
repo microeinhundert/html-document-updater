@@ -345,7 +345,7 @@ class HTMLDocumentUpdater {
       if (typeof config.htmlDocument === 'string' || config.htmlDocument instanceof HTMLDocument) {
         this.htmlDocument = config.htmlDocument;
       } else {
-        throw new Error('No valid "htmlDocument" passed to HTMLDocumentUpdater! It has to to be either of type "string" or "HTMLDocument.');
+        throw new Error('No valid "htmlDocument" passed to HTMLDocumentUpdater! It has to be either of type "string" or "HTMLDocument.');
       }
     }
 
@@ -353,7 +353,7 @@ class HTMLDocumentUpdater {
       if (typeof config.updatedHtmlDocument === 'string' || config.updatedHtmlDocument instanceof HTMLDocument) {
         this.updatedHtmlDocument = config.updatedHtmlDocument;
       } else {
-        throw new Error('No valid "updatedHtmlDocument" passed to HTMLDocumentUpdater! It has to to be either of type "string" or "HTMLDocument.');
+        throw new Error('No valid "updatedHtmlDocument" passed to HTMLDocumentUpdater! It has to be either of type "string" or "HTMLDocument.');
       }
     }
 
