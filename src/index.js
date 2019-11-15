@@ -3,6 +3,7 @@
  *
  * <body id="test" class="test" data-update-id="body">
  *  <h1 data-test="test" data-update-id="main-heading">Hello World</h1>
+ *  <mi-custom-element data-update-id="custom-element">This is a custom element.</mi-custom-element>
  * </body>
  *
  *
@@ -24,6 +25,9 @@
  *     mainHeading: {
  *       attributes: ['data-test'],
  *       innerHTML: true
+ *     },
+ *     customElement: {
+ *       outerHTML: true
  *     }
  *   }
  * });
@@ -230,7 +234,7 @@ class HTMLDocumentUpdater {
   }
 
   /**
-   * Update innerHTML in the HTMLDocument with inenrHTML from the updated (remote) HTMLDocument.
+   * Update innerHTML in the HTMLDocument with innerHTML from the updated (remote) HTMLDocument.
    * @param {HTMLElement} elementInHtmlDocument The element to update in the HTMLDocument.
    * @param {HTMLElement} elementInUpdatedHtmlDocument The same element in the updated (remote) HTMLDocument.
    * @param {string} updateIdentifier The update identifier of the element.
@@ -243,6 +247,25 @@ class HTMLDocumentUpdater {
   ) {
     if (elementInHtmlDocument && elementInUpdatedHtmlDocument) {
       elementInHtmlDocument.innerHTML = elementInUpdatedHtmlDocument.innerHTML; // eslint-disable-line
+    } else if (this.options.strictChecking) {
+      throw new Error(`The element with update identifier "${updateIdentifier}" does not exist in both HTMLDocuments!`);
+    }
+  }
+
+  /**
+   * Update outerHTML in the HTMLDocument with outerHTML from the updated (remote) HTMLDocument.
+   * @param {HTMLElement} elementInHtmlDocument The element to update in the HTMLDocument.
+   * @param {HTMLElement} elementInUpdatedHtmlDocument The same element in the updated (remote) HTMLDocument.
+   * @param {string} updateIdentifier The update identifier of the element.
+   * @returns {void}
+   */
+  updateOuterHtml(
+    elementInHtmlDocument,
+    elementInUpdatedHtmlDocument,
+    updateIdentifier
+  ) {
+    if (elementInHtmlDocument && elementInUpdatedHtmlDocument) {
+      elementInHtmlDocument.outerHTML = elementInUpdatedHtmlDocument.outerHTML; // eslint-disable-line
     } else if (this.options.strictChecking) {
       throw new Error(`The element with update identifier "${updateIdentifier}" does not exist in both HTMLDocuments!`);
     }
@@ -270,8 +293,8 @@ class HTMLDocumentUpdater {
         const $elementInUpdatedHtmlDocument = this.elementsInUpdatedHtmlDocument.get(updateIdentifier);
         const $elementConfig = this.updates[updateIdentifier];
 
-        // Update attributes
         if ('attributes' in $elementConfig && $elementConfig.attributes.length) {
+          // Update attributes
           this.updateAttributes(
             $elementInHtmlDocument,
             $elementInUpdatedHtmlDocument,
@@ -280,14 +303,22 @@ class HTMLDocumentUpdater {
           );
         }
 
-        // Update innerHTML
-        if ('innerHTML' in $elementConfig && $elementConfig.innerHTML) {
+        if ('outerHTML' in $elementConfig && $elementConfig.outerHTML === true) {
+          // Update outerHTML
+          this.updateOuterHtml(
+            $elementInHtmlDocument,
+            $elementInUpdatedHtmlDocument,
+            updateIdentifier
+          );
+        } else if ('innerHTML' in $elementConfig && $elementConfig.innerHTML === true) {
+          // Update innerHTML
           this.updateInnerHtml(
             $elementInHtmlDocument,
             $elementInUpdatedHtmlDocument,
             updateIdentifier
           );
         }
+
       } else if (this.options.strictChecking) {
         throw new Error(`No update configuration found for element with identifier "${updateIdentifier}"!`);
       }
@@ -335,7 +366,7 @@ class HTMLDocumentUpdater {
   constructor(config = {}) {
     if ('options' in config) {
       if (typeof config.options === 'object') {
-        this.options = Object.assign(this.options, config.options);
+        this.options = { ...this.options, ...config.options };
       } else {
         throw new Error('No valid "options" object passed to HTMLDocumentUpdater!');
       }

@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43,6 +47,15 @@ var HTMLDocumentUpdater = function () {
       }
     }
   }, {
+    key: "updateOuterHtml",
+    value: function updateOuterHtml(elementInHtmlDocument, elementInUpdatedHtmlDocument, updateIdentifier) {
+      if (elementInHtmlDocument && elementInUpdatedHtmlDocument) {
+        elementInHtmlDocument.outerHTML = elementInUpdatedHtmlDocument.outerHTML;
+      } else if (this.options.strictChecking) {
+        throw new Error("The element with update identifier \"".concat(updateIdentifier, "\" does not exist in both HTMLDocuments!"));
+      }
+    }
+  }, {
     key: "formatUpdateIdentifier",
     value: function formatUpdateIdentifier(identifier) {
       var $formattedIdentifier = identifier.replace(/-([a-z])/g, function (g) {
@@ -67,7 +80,9 @@ var HTMLDocumentUpdater = function () {
             _this2.updateAttributes($elementInHtmlDocument, $elementInUpdatedHtmlDocument, $elementConfig.attributes, updateIdentifier);
           }
 
-          if ('innerHTML' in $elementConfig && $elementConfig.innerHTML) {
+          if ('outerHTML' in $elementConfig && $elementConfig.outerHTML === true) {
+            _this2.updateOuterHtml($elementInHtmlDocument, $elementInUpdatedHtmlDocument, updateIdentifier);
+          } else if ('innerHTML' in $elementConfig && $elementConfig.innerHTML === true) {
             _this2.updateInnerHtml($elementInHtmlDocument, $elementInUpdatedHtmlDocument, updateIdentifier);
           }
         } else if (_this2.options.strictChecking) {
@@ -202,7 +217,7 @@ var HTMLDocumentUpdater = function () {
 
     if ('options' in config) {
       if (_typeof(config.options) === 'object') {
-        this.options = Object.assign(this.options, config.options);
+        this.options = _objectSpread({}, this.options, {}, config.options);
       } else {
         throw new Error('No valid "options" object passed to HTMLDocumentUpdater!');
       }
@@ -212,7 +227,7 @@ var HTMLDocumentUpdater = function () {
       if (typeof config.htmlDocument === 'string' || config.htmlDocument instanceof HTMLDocument) {
         this.htmlDocument = config.htmlDocument;
       } else {
-        throw new Error('No valid "htmlDocument" passed to HTMLDocumentUpdater! It has to to be either of type "string" or "HTMLDocument.');
+        throw new Error('No valid "htmlDocument" passed to HTMLDocumentUpdater! It has to be either of type "string" or "HTMLDocument".');
       }
     }
 
@@ -220,7 +235,7 @@ var HTMLDocumentUpdater = function () {
       if (typeof config.updatedHtmlDocument === 'string' || config.updatedHtmlDocument instanceof HTMLDocument) {
         this.updatedHtmlDocument = config.updatedHtmlDocument;
       } else {
-        throw new Error('No valid "updatedHtmlDocument" passed to HTMLDocumentUpdater! It has to to be either of type "string" or "HTMLDocument.');
+        throw new Error('No valid "updatedHtmlDocument" passed to HTMLDocumentUpdater! It has to be either of type "string" or "HTMLDocument".');
       }
     }
 

@@ -58,6 +58,7 @@ htmlDocumentUpdater.update();
 ```html
 <body id="test" class="test" data-update-id="body">
   <h1 data-test="test" data-update-id="main-heading">Hello World</h1>
+  <mi-custom-element data-update-id="custom-element">This is a custom element.</mi-custom-element>
 </body>
 ```
 > The `data-update-id` attribute specifies an unique identifier for the element. This identifier is later used to reference the element in the `updates` configuration.
@@ -93,6 +94,20 @@ const htmlDocumentUpdater = new HTMLDocumentUpdater({
     },
     mainHeading: {
       innerHTML: true
+    }
+  }
+});
+```
+
+To update the outerHTML of the `<mi-custom-element>` custom element:
+
+```js
+import HTMLDocumentUpdater from 'html-document-updater';
+
+const htmlDocumentUpdater = new HTMLDocumentUpdater({
+  updates: {
+    customElement: {
+      outerHTML: true
     }
   }
 });
