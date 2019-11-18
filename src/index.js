@@ -32,8 +32,8 @@
  *   }
  * });
  *
- * this.htmlDocumentUpdater.updatedHtmlDocument = HTMLDocument; // Set the updated (remote) HTMLDocument
- * this.htmlDocumentUpdater.update(); // Update the HTMLDocument with content taken from the updated (remote) HTMLDocument
+ * htmlDocumentUpdater.updatedHtmlDocument = HTMLDocument; // Set the updated (remote) HTMLDocument
+ * htmlDocumentUpdater.update(); // Update the HTMLDocument with content taken from the updated (remote) HTMLDocument
  */
 class HTMLDocumentUpdater {
   /**
