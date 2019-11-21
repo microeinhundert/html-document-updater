@@ -3,7 +3,7 @@ A small utility to update parts of an HTMLDocument with content from another HTM
 
 ## Installation
 ```console
-npm install html-document-updater
+npm install html-document-updater --save
 ```
 or
 ```console
