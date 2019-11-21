@@ -38,7 +38,7 @@ htmlDocumentUpdater.htmlDocument = '<html></html>';
 htmlDocumentUpdater.htmlDocument = document;
 
 // You can also get the updated HTMLDocument this way if it's not the document object (after calling the update function)
-console.log(this.htmlDocumentUpdater.htmlDocument);
+console.log(htmlDocumentUpdater.htmlDocument);
 
 
 // Set the updated (remote) HTMLDocument afterwards
